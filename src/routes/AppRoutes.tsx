@@ -1,18 +1,21 @@
 import { Routes, Route } from 'react-router-dom'
-
-function Dashboard() {
-  return <h1>Dashboard</h1>
-}
-
-function Login() {
-  return <h1>Login</h1>
-}
+import DashboardPage from '../pages/Dashboard'
+import LoginPage from '../pages/LoginPage'
+import ProtectedRoute from './ProtectedRoute'
+import { ROUTES } from '../constants/routes'
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path='/' element={<Dashboard />} />
-      <Route path='/login' element={<Login />} />
+      <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route
+        path={ROUTES.HOME}
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   )
 }
